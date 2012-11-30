@@ -119,7 +119,7 @@ void USB0_IRQHandler(void)
   // Handle Start of Frame Interrupt
   if (usbCommonInterruptMask & SI32_USB_A_CMINT_SOFI_MASK)
   {
-	 // EVENT_USB_Device_StartOfFrame();
+//	  EVENT_USB_Device_StartOfFrame();
   }
 
   // Handle Resume Interrupt

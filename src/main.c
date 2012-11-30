@@ -54,19 +54,8 @@ int main()
    enter_default_mode_from_reset();
 //   uart_test();
    vcp_main();
-   //PERFORM THE FOLLOWING TASKS FOREVER
-   tmp = __get_PRIMASK();
    while (1)
    {
-	   if(SI32_PBSTD_A_read_pin(SI32_PBSTD_2,8) == 0)
-	   {
-		   __set_PRIMASK(tmp);
-//		   __enable_irq();
-	   }
-	   if(SI32_PBSTD_A_read_pin(SI32_PBSTD_2,9) == 0)
-	   {
-		   __disable_irq();
-	   }
      // if msTicks has changed
      if (msTicks != msTicks_last)       
      {

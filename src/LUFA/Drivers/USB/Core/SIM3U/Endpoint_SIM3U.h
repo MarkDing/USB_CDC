@@ -217,8 +217,11 @@
 			 */
 			static inline uint8_t Endpoint_GetEndpointDirection(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
 			static inline uint8_t Endpoint_GetEndpointDirection(void)
-			{  // Make sure every call function already check usb_ep_selected in valid range.
-				return (USB_EPn(usb_ep_selected)->EPCONTROL.DIRSEL)?ENDPOINT_DIR_IN : ENDPOINT_DIR_OUT;
+			{
+				if(usb_ep_selected == ENDPOINT_CONTROLEP)
+					return ENDPOINT_DIR_IN;
+				else
+					return (USB_EPn(usb_ep_selected)->EPCONTROL.DIRSEL)?ENDPOINT_DIR_IN : ENDPOINT_DIR_OUT;
 			}
 
 			/** Get the endpoint address of the currently selected endpoint. This is typically used to save
@@ -255,7 +258,10 @@
 			static inline void Endpoint_ResetEndpoint(const uint8_t Address) ATTR_ALWAYS_INLINE;
 			static inline void Endpoint_ResetEndpoint(const uint8_t Address)
 			{
-				// TODO Add FIFO flush here?
+				if(usb_ep_selected != ENDPOINT_CONTROLEP)
+				{
+					USB_EPn(usb_ep_selected)->EPCONTROL.U32 |= (1<<20)|(1<<3);
+				}
 			}
 
 			/** Enables the currently selected endpoint so that data can be sent and received through it to
@@ -325,11 +331,11 @@
 			{
 				if(usb_ep_selected == ENDPOINT_CONTROLEP)
 				{
-					return true; // TODO
+					return (SI32_USB_0->EP0CONTROL.IPRDYI?false:true);
 				}
 				else
 				{
-					return (USB_EPn(usb_ep_selected)->EPCONTROL.IPRDYI?false:true); // TODO
+					return (USB_EPn(usb_ep_selected)->EPCONTROL.IPRDYI?false:true);
 				}
 			}
 			/** Determines if the selected OUT endpoint has received new packet from the host.
@@ -415,7 +421,7 @@
 			static inline bool Endpoint_HasEndpointInterrupted(const uint8_t Address) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
 			static inline bool Endpoint_HasEndpointInterrupted(const uint8_t Address)
 			{
-				return 0; //TODO
+				return 0;
 			}
 
 
@@ -453,7 +459,7 @@
 			static inline void Endpoint_ClearIN(void)
 			{
 				if(usb_ep_selected == ENDPOINT_CONTROLEP)
-				{// TODO consider packet size large than EP0 size
+				{
 		            SI32_USB_A_set_data_end_ep0(SI32_USB_0);
 		            SI32_USB_A_set_in_packet_ready_ep0(SI32_USB_0);
 				}
@@ -470,14 +476,14 @@
 			 */
 			static inline void Endpoint_ClearOUT(void) ATTR_ALWAYS_INLINE;
 			static inline void Endpoint_ClearOUT(void)
-			{ // TODO don't know what is usage here.
+			{
 				if(usb_ep_selected == ENDPOINT_CONTROLEP)
 				{
 					SI32_USB_A_clear_out_packet_ready_ep0(SI32_USB_0); // OPRDYIS = 1
 				}
 				else
 				{
-					//SI32_USBEP_A_clear_outpacket_ready(USB_EPn(usb_ep_selected));  // TODO
+
 					USB_EPn(usb_ep_selected)->EPCONTROL.OPRDYI = 0;
 				}
 			}
@@ -571,12 +577,9 @@
 			static inline void Endpoint_ResetDataToggle(void) ATTR_ALWAYS_INLINE;
 			static inline void Endpoint_ResetDataToggle(void)
 			{
-				if(usb_ep_selected < ENDPOINT_TOTAL_ENDPOINTS)
+				if(usb_ep_selected != ENDPOINT_CONTROLEP)
 				{
-					if(usb_ep_selected != ENDPOINT_CONTROLEP)
-					{
-						USB_EPn(usb_ep_selected)->EPCONTROL.U32 |= (1<<23)|(1<<6);
-					}
+					USB_EPn(usb_ep_selected)->EPCONTROL.U32 |= (1<<23)|(1<<6);
 				}
 			}
 

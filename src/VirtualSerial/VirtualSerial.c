@@ -76,18 +76,6 @@ USB_ClassInfo_CDC_Device_t VirtualSerial_CDC_Interface =
 			.Banks            = 1,
 		},
 	},
-#if 1
-	.State =
-	{
-		.LineEncoding =
-		{
-			.BaudRateBPS 			=0x0001c200, // 115200
-			.CharFormat 			=0x00,
-			.ParityType 			=0x00,
-			.DataBits 				=0x08,
-		},
-	},
-#endif
 };
 
 void uart_rev_handler(void)
@@ -131,7 +119,7 @@ int vcp_main(void)
 			uart_send_byte(RingBuffer_Remove(&USBtoUSART_Buffer));
 
 //		CDC_Device_USBTask(&VirtualSerial_CDC_Interface);
-		USB_USBTask();
+//		USB_USBTask();
 	}
 }
 

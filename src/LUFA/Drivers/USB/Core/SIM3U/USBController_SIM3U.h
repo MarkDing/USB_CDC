@@ -256,7 +256,7 @@
 		/* Function Prototypes: */
 			#if defined(__INCLUDE_FROM_USB_CONTROLLER_C)
 				#if defined(USB_CAN_BE_DEVICE)
-				// TODO static void USB_Init_Device(void);
+				// static void USB_Init_Device(void);
 				#endif
 
 			#endif

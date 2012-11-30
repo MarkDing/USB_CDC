@@ -52,11 +52,7 @@ bool Endpoint_ConfigureEndpoint(const uint8_t Address,
 	uint8_t dir_sel =  (Address & 0x80)?1:0;
 	uint32_t ep_config = 0;
 
-	if(Number == ENDPOINT_CONTROLEP)
-	{
-		// TODO EP0 config
-	}
-	else if (Number < ENDPOINT_TOTAL_ENDPOINTS)
+	if(Number != ENDPOINT_CONTROLEP)
 	{
 		ep_config = 0x450024; // bit 2,5,16,18,22 must be writen
 

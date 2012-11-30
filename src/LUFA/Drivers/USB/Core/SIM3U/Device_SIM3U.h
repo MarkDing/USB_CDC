@@ -130,7 +130,7 @@
 				static inline void USB_Device_EnableSOFEvents(void) ATTR_ALWAYS_INLINE;
 				static inline void USB_Device_EnableSOFEvents(void)
 				{
-					//TODO USB_INT_Enable(USB_INT_SOFI);
+					SI32_USB_A_enable_start_of_frame_interrupt(SI32_USB_0);
 				}
 
 				/** Disables the device mode Start Of Frame events. When disabled, this stops the firing of the
@@ -141,7 +141,7 @@
 				static inline void USB_Device_DisableSOFEvents(void) ATTR_ALWAYS_INLINE;
 				static inline void USB_Device_DisableSOFEvents(void)
 				{
-					//TODO USB_INT_Disable(USB_INT_SOFI);
+					SI32_USB_A_disable_start_of_frame_interrupt(SI32_USB_0);
 				}
 			#endif
 
@@ -184,7 +184,7 @@
 			static inline bool USB_Device_IsAddressSet(void) ATTR_ALWAYS_INLINE ATTR_WARN_UNUSED_RESULT;
 			static inline bool USB_Device_IsAddressSet(void)
 			{
-				return (SI32_USB_A_read_faddr(SI32_USB_0)?true:false); // TODO: whether is correct
+				return (SI32_USB_A_read_faddr(SI32_USB_0)?true:false);
 			}
 	#endif
 

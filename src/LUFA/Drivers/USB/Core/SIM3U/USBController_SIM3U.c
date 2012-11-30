@@ -88,7 +88,7 @@ void USB_Init(const uint8_t Options)
 	// Enable USB interrupts
 	NVIC_EnableIRQ(USB0_IRQn);
 
-	USB_DeviceState = DEVICE_STATE_Powered; //TODO mark.ding add
+	USB_DeviceState = DEVICE_STATE_Powered;
 	// Uninhibit the module once all initialization is complete
 	SI32_USB_A_enable_module(SI32_USB_0);
     SI32_USB_A_enable_internal_pull_up(SI32_USB_0);
