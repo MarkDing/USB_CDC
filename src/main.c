@@ -14,12 +14,11 @@
 // application
 #include "gModes.h"
 #include "gCPU.h"
-extern void uart_send_data(unsigned char *data, unsigned int count);
-extern int uart_get_data(unsigned char *data, unsigned int count);
+
+extern int vcp_main(void);
+
+#if 0
 extern void uart_configuration(uint32_t baud_rate,uint8_t stop_bits,uint8_t parity,uint8_t data_bits);
-
-uint8_t data_buf[16];
-
 /*
  *   baud_rate: baud rate
  *   stop_bits: 0 - 1 stop bit; 1 - 1.5 stop bits; 2 - 2 stop bits
@@ -29,6 +28,7 @@ uint8_t data_buf[16];
 #define BAUD_RATE 115200
 void uart_test(void)
 {
+	uint8_t data_buf[16];
 	uart_configuration(115200,0,0,8);
 	while(1)
 	{
@@ -38,7 +38,16 @@ void uart_test(void)
 		}
 	}
 }
-extern int vcp_main(void);
+
+void led_on(uint32_t value)
+{
+	SI32_PBSTD_A_write_pins_low(SI32_PBSTD_2, value);
+}
+void led_off(uint32_t value)
+{
+	SI32_PBSTD_A_write_pins_high(SI32_PBSTD_2, value);
+}
+#endif
 //==============================================================================
 // myApplication.
 //==============================================================================
@@ -52,7 +61,6 @@ int main()
 
    // Enter the default operating mode for this application
    enter_default_mode_from_reset();
-//   uart_test();
    vcp_main();
    while (1)
    {

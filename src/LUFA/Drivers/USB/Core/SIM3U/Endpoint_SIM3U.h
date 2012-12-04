@@ -563,11 +563,11 @@
 				{
 					if(Endpoint_GetEndpointDirection()== ENDPOINT_DIR_IN)
 					{
-						status = USB_EPn(usb_ep_selected)->EPCONTROL.ISTSTLI;
+						status = USB_EPn(usb_ep_selected)->EPCONTROL.ISDSTL;
 					}
 					else
 					{
-						status = USB_EPn(usb_ep_selected)->EPCONTROL.OSTSTLI;
+						status = USB_EPn(usb_ep_selected)->EPCONTROL.OSDSTL;
 					}
 				}
 				return status;
@@ -579,7 +579,8 @@
 			{
 				if(usb_ep_selected != ENDPOINT_CONTROLEP)
 				{
-					USB_EPn(usb_ep_selected)->EPCONTROL.U32 |= (1<<23)|(1<<6);
+					USB_EPn(usb_ep_selected)->EPCONTROL.OCLRDT = 1;
+					USB_EPn(usb_ep_selected)->EPCONTROL.ICLRDT = 1;
 				}
 			}
 
