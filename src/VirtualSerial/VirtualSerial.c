@@ -178,5 +178,19 @@ void EVENT_CDC_Device_LineEncodingChanged(USB_ClassInfo_CDC_Device_t* const CDCI
 			CDCInterfaceInfo->State.LineEncoding.ParityType,
 			CDCInterfaceInfo->State.LineEncoding.DataBits);
 }
+void EVENT_CDC_Device_ControLineStateChanged(USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo)
+{
 
+}
+
+void EVENT_CDC_Device_BreakSent(USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo,
+                                const uint8_t Duration)
+{
+
+}
+
+void EVENT_USB_Device_WakeUp(void)
+{
+
+}
 

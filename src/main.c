@@ -56,7 +56,7 @@ int main()
    // msTicks increments every 1ms (1Khz). Driven by boot osc (myCpu.c)
    // _last variables store the last seen state of variables so we know when they have changed
    uint32_t msTicks_last=0xffffffff;
-   uint32_t tmp;
+
    while(SI32_PBSTD_A_read_pin(SI32_PBSTD_2,8) == 0);
 
    // Enter the default operating mode for this application
