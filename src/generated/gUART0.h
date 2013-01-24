@@ -18,6 +18,7 @@
 
 #ifndef __GUART0_H__
 #define __GUART0_H__
+#include <SI32_UART_A_Type.h>
 
 void UART0_IRQHandler(void);
 void UART0_enter_default_mode_from_reset(void);

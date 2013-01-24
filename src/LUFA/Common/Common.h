@@ -318,7 +318,8 @@
 				#elif (ARCH == ARCH_XMEGA)
 				return SREG;
 				#elif (ARCH == ARCH_SIM3U)
-				return __get_PRIMASK();
+				//return __get_PRIMASK();
+				return __get_BASEPRI();
 				#endif
 
 				GCC_MEMORY_BARRIER();
@@ -347,10 +348,10 @@
 				#elif (ARCH == ARCH_XMEGA)
 				SREG = GlobalIntState;
 				#elif (ARCH == ARCH_SIM3U)
-				__set_PRIMASK(GlobalIntState);
-				//__enable_irq();
+				// disable priority 0xF0-0xff interrupt
+				__set_BASEPRI(0xF0);
+				//__set_PRIMASK(GlobalIntState);
 				#endif
-
 				GCC_MEMORY_BARRIER();
 			}
 
@@ -370,7 +371,7 @@
 				#elif (ARCH == ARCH_XMEGA)
 				sei();
 				#elif (ARCH == ARCH_SIM3U)
-				__enable_irq();
+				//__enable_irq();
 				#endif
 
 				GCC_MEMORY_BARRIER();
@@ -391,8 +392,10 @@
 				__builtin_ssrf(AVR32_SR_GM_OFFSET);
 				#elif (ARCH == ARCH_XMEGA)
 				cli();
-				#elif (ARCH == ARCH_SIM3u)
-				__disable_irq();
+				#elif (ARCH == ARCH_SIM3U)
+				// disable priority 0x11-0xff interrupt
+				__set_BASEPRI(0x11);
+				//__disable_irq();
 				#endif
 
 				GCC_MEMORY_BARRIER();

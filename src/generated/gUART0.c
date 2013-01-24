@@ -17,7 +17,6 @@
 //==============================================================================
 
 // Include peripheral access modules used in this file
-#include <SI32_UART_A_Type.h>
 #include <si32_device.h>
 #include "gUART0.h"
 #include "gCPU.h"

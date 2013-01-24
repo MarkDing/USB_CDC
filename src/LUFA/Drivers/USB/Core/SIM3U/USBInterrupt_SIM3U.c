@@ -53,10 +53,13 @@ void USB0_epn_handler(void)
 
 	control_reg = SI32_USBEP_A_read_epcontrol(ep);
 
-	if(control_reg & SI32_USBEP_A_EPCONTROL_OPRDYI_MASK)
+	// Hardware sets the OPRDYI bit to 1 once out packet ready.
+#if 0
+ 	if(control_reg & SI32_USBEP_A_EPCONTROL_OPRDYI_MASK)
 	{
 		EVENT_USB_recv_data();
 	}
+#endif
 	if((control_reg & SI32_USBEP_A_EPCONTROL_OSTSTLI_MASK) ||
 		(control_reg & SI32_USBEP_A_EPCONTROL_ISTSTLI_MASK))
 	{
