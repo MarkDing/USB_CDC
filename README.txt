@@ -6,4 +6,5 @@ Status
 ----------------------------------
 * Change to USB ISR driven routine. 
 * USB CDC class has been tested and works well.
+* Support both 32 bit and 64 bit Windows
 * Other classes need to be tested in future.

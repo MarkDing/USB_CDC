@@ -65,6 +65,8 @@
 			#error Do not include this file directly. Include LUFA/Drivers/USB/USB.h instead.
 		#endif
 
+	#define __SIM3U1XX__
+	#define USB_DEVICE_ONLY
 	/* Public Interface - May be used in end-application: */
 	#if defined(__DOXYGEN__)
 		/** Indicates that the target AVR microcontroller belongs to the Series 2 AVR8 USB controller
