@@ -15,7 +15,7 @@
 #include "gModes.h"
 #include "gCPU.h"
 
-extern int vcp_main(void);
+extern void vcp_main(void);
 
 #if 0
 extern void uart_configuration(uint32_t baud_rate,uint8_t stop_bits,uint8_t parity,uint8_t data_bits);
