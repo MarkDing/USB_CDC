@@ -349,7 +349,7 @@
 				SREG = GlobalIntState;
 				#elif (ARCH == ARCH_SIM3U)
 				// disable priority 0xF0-0xff interrupt
-				__set_BASEPRI(0xF0);
+//				__set_BASEPRI(0xF0);
 				//__set_PRIMASK(GlobalIntState);
 				#endif
 				GCC_MEMORY_BARRIER();
@@ -394,7 +394,7 @@
 				cli();
 				#elif (ARCH == ARCH_SIM3U)
 				// disable priority 0x11-0xff interrupt
-				__set_BASEPRI(0x11);
+//				__set_BASEPRI(0x11);
 				//__disable_irq();
 				#endif
 
